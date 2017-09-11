@@ -32,7 +32,10 @@ parts:
         source: helper
     konversation:
         plugin: cmake
-        stage-packages: [qml-module-org-kde-kirigami2]
+        stage-packages:
+        - qml-module-org-kde-kirigami2
+        - qml-module-org-kde-qqc2desktopstyle
+        - fonts-noto
         build-packages:
         - extra-cmake-modules
         - kdoctools-dev
@@ -70,7 +73,6 @@ parts:
             - "-usr/share/ECM/*"
             - "-usr/share/doc/*"
             - "-usr/share/man/*"
-            - "-usr/share/icons/breeze-dark*"
             - "-usr/bin/X11"
             - "-usr/lib/gcc/x86_64-linux-gnu/6.0.0"
         stage:
@@ -87,3 +89,180 @@ parts:
         - "-DENABLE_TESTING=OFF"
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
+    breeze:
+        after: [konversation]
+        plugin: cmake
+        build-packages:
+        - pkg-config
+        - libx11-dev
+        - extra-cmake-modules
+        - qtbase5-dev
+        - libkf5config-dev
+        - libkf5configwidgets-dev
+        - libkf5windowsystem-dev
+        - libkf5i18n-dev
+        - libkf5coreaddons-dev
+        - libkf5guiaddons-dev
+        - libqt5x11extras5-dev
+        - libkf5style-dev
+        - libkf5kcmutils-dev
+        - kwayland-dev
+        - libkf5package-dev
+        stage-packages: []
+        filesets:
+            exclusion:
+            - "-usr/lib/*/cmake/*"
+            - "-usr/lib/*/qt5/bin/moc"
+            - "-usr/lib/*/qt5/bin/qmake"
+            - "-usr/lib/*/qt5/bin/rcc"
+            - "-usr/lib/*/qt5/bin/*cpp*"
+            - "-usr/include/*"
+            - "-usr/share/ECM/*"
+            - "-usr/share/xml/docbook/*"
+            - "-usr/share/doc/*"
+            - "-usr/share/man/*"
+            - "-usr/share/icons/breeze/*.rcc"
+            - "-usr/share/wallpapers/*"
+            - "-usr/share/fonts/truetype/freefont/*"
+            - "-usr/share/pkgconfig"
+            - "-usr/lib/*/pkgconfig"
+            - "-usr/share/QtCurve"
+            - "-usr/share/kde4"
+            - "-usr/share/bug"
+            - "-usr/share/debhelper"
+            - "-usr/share/lintian"
+            - "-usr/share/menu"
+            - "-usr/bin/*vlc"
+            - "-usr/bin/dh_*"
+            - "-usr/lib/*/*.a"
+            - "-usr/lib/*/*.pri"
+        snap:
+        - "$exclusion"
+        stage:
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze/*.rcc"
+        - "-usr/share/wallpapers/*"
+        - "-usr/share/fonts/truetype/freefont/*"
+        configflags:
+        - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        - "-DWITH_DECORATIONS=OFF"
+        source: http://download.kde.org/stable/plasma/5.10.5/breeze-5.10.5.tar.xz
+    xdg-portal-qpa:
+        after: [konversation]
+        plugin: cmake
+        build-packages:
+        - extra-cmake-modules
+        - qtbase5-dev
+        - qtbase5-private-dev
+        stage-packages: []
+        filesets:
+            exclusion:
+            - "-usr/lib/*/cmake/*"
+            - "-usr/lib/*/qt5/bin/moc"
+            - "-usr/lib/*/qt5/bin/qmake"
+            - "-usr/lib/*/qt5/bin/rcc"
+            - "-usr/lib/*/qt5/bin/*cpp*"
+            - "-usr/include/*"
+            - "-usr/share/ECM/*"
+            - "-usr/share/xml/docbook/*"
+            - "-usr/share/doc/*"
+            - "-usr/share/man/*"
+            - "-usr/share/icons/breeze/*.rcc"
+            - "-usr/share/wallpapers/*"
+            - "-usr/share/fonts/truetype/freefont/*"
+            - "-usr/share/pkgconfig"
+            - "-usr/lib/*/pkgconfig"
+            - "-usr/share/QtCurve"
+            - "-usr/share/kde4"
+            - "-usr/share/bug"
+            - "-usr/share/debhelper"
+            - "-usr/share/lintian"
+            - "-usr/share/menu"
+            - "-usr/bin/*vlc"
+            - "-usr/bin/dh_*"
+            - "-usr/lib/*/*.a"
+            - "-usr/lib/*/*.pri"
+        snap:
+        - "$exclusion"
+        stage:
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze/*.rcc"
+        - "-usr/share/wallpapers/*"
+        - "-usr/share/fonts/truetype/freefont/*"
+        configflags:
+        - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        source: https://anongit.kde.org/flatpak-platform-plugin.git
+    plasma-integration:
+        after:
+        - breeze
+        plugin: cmake
+        build-packages:
+        - extra-cmake-modules
+        - kio-dev
+        - kwayland-dev
+        - libkf5config-dev
+        - libkf5configwidgets-dev
+        - libkf5i18n-dev
+        - libkf5iconthemes-dev
+        - libkf5notifications-dev
+        - libkf5widgetsaddons-dev
+        - libqt5x11extras5-dev
+        - libxcursor-dev
+        - qtbase5-dev
+        - qtbase5-private-dev
+        stage-packages: []
+        filesets:
+            exclusion:
+            - "-usr/lib/*/cmake/*"
+            - "-usr/lib/*/qt5/bin/moc"
+            - "-usr/lib/*/qt5/bin/qmake"
+            - "-usr/lib/*/qt5/bin/rcc"
+            - "-usr/lib/*/qt5/bin/*cpp*"
+            - "-usr/include/*"
+            - "-usr/share/ECM/*"
+            - "-usr/share/xml/docbook/*"
+            - "-usr/share/doc/*"
+            - "-usr/share/man/*"
+            - "-usr/share/icons/breeze/*.rcc"
+            - "-usr/share/wallpapers/*"
+            - "-usr/share/fonts/truetype/freefont/*"
+            - "-usr/share/pkgconfig"
+            - "-usr/lib/*/pkgconfig"
+            - "-usr/share/QtCurve"
+            - "-usr/share/kde4"
+            - "-usr/share/bug"
+            - "-usr/share/debhelper"
+            - "-usr/share/lintian"
+            - "-usr/share/menu"
+            - "-usr/bin/*vlc"
+            - "-usr/bin/dh_*"
+            - "-usr/lib/*/*.a"
+            - "-usr/lib/*/*.pri"
+        snap:
+        - "$exclusion"
+        stage:
+        - "-usr/share/doc/*"
+        - "-usr/share/man/*"
+        - "-usr/share/icons/breeze/*.rcc"
+        - "-usr/share/wallpapers/*"
+        - "-usr/share/fonts/truetype/freefont/*"
+        configflags:
+        - "-DKDE_INSTALL_USE_QT_SYS_PATHS=ON"
+        - "-DCMAKE_INSTALL_PREFIX=/usr"
+        - "-DCMAKE_BUILD_TYPE=Release"
+        - "-DENABLE_TESTING=OFF"
+        - "-DBUILD_TESTING=OFF"
+        - "-DKDE_SKIP_TEST_SETTINGS=ON"
+        source: http://download.kde.org/stable/plasma/5.10.5/plasma-integration-5.10.5.tar.xz
