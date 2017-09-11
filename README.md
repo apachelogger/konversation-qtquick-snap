@@ -1,4 +1,4 @@
-# Setup neon docker
+# Local build with neon docker
 
 Make sure docker is installed for you distro and you have access to it (you are in docker group)
 
@@ -22,4 +22,14 @@ On the host you can now install the snap.
 
 ```
 sudo snap install --force-dangerous --devmode /tmp/konvi-build/*.snap
+```
+
+# Jenkins build
+
+Hit a build here https://build.neon.kde.org/view/testy/job/test_konversation-qtquick/
+
+Gets published to store (unless there's a problem with auto-validation)
+
+```
+sudo snap install --devmode --channel edge konversation-qtquick
 ```

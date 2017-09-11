@@ -25,5 +25,5 @@ task :publish do
   cfgdir = Dir.home + '/.config/snapcraft'
   FileUtils.mkpath(cfgdir)
   File.write("#{cfgdir}/snapcraft.cfg", File.read('snapcraft.cfg'))
-  sh 'snapcraft push *.snap --release candidate,beta,edge'
+  sh 'snapcraft push *.snap --release edge'
 end
