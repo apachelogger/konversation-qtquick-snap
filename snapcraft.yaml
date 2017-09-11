@@ -28,7 +28,7 @@ parts:
     helper:
         plugin: dump
         prime:
-        - launch
+        - *
         source: helper
     konversation:
         plugin: cmake
