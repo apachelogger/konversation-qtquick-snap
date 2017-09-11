@@ -36,6 +36,7 @@ parts:
         - qml-module-org-kde-kirigami2
         - qml-module-org-kde-qqc2desktopstyle
         - fonts-noto
+        - breeze-icon-theme
         build-packages:
         - extra-cmake-modules
         - kdoctools-dev
