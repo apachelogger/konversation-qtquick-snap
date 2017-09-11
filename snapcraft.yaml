@@ -28,7 +28,7 @@ parts:
     helper:
         plugin: dump
         prime:
-        - *
+        - '*'
         source: helper
     konversation:
         plugin: cmake
@@ -91,6 +91,7 @@ parts:
         - "-DENABLE_TESTING=OFF"
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
+    # Build own breeze as neon's is too fat
     breeze:
         after: [konversation]
         plugin: cmake
@@ -155,6 +156,7 @@ parts:
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         - "-DWITH_DECORATIONS=OFF"
         source: http://download.kde.org/stable/plasma/5.10.5/breeze-5.10.5.tar.xz
+    # Portal support (snapd doesn't have the frontend bits, but there is a PoC)
     xdg-portal-qpa:
         after: [konversation]
         plugin: cmake
@@ -206,6 +208,7 @@ parts:
         - "-DBUILD_TESTING=OFF"
         - "-DKDE_SKIP_TEST_SETTINGS=ON"
         source: https://anongit.kde.org/flatpak-platform-plugin.git
+    # Custom integration to go with our breeze build
     plasma-integration:
         after:
         - breeze
