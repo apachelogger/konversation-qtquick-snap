@@ -8,7 +8,8 @@ cleanNode('8core-amd64 && cloud') {
   }
   stage('snapcraft') {
     sh '~/tooling/nci/contain.rb rake snapcraft'
-    stash includes: '**', name: 'snapcraft'
+    archiveArtifacts '*_amd64.snap'
+    stash name: 'snaps', includes: 'Rakefile, *_amd64.snap'
   }
 }
 
