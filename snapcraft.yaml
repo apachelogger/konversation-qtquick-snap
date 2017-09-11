@@ -37,6 +37,7 @@ parts:
         - qml-module-org-kde-qqc2desktopstyle
         - fonts-noto
         - breeze-icon-theme
+        - frameworkintegration
         build-packages:
         - extra-cmake-modules
         - kdoctools-dev
