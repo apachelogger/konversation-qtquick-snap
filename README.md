@@ -26,7 +26,7 @@ sudo snap install --force-dangerous --devmode /tmp/konvi-build/*.snap
 
 # Jenkins build
 
-Hit a build here https://build.neon.kde.org/view/testy/job/test_konversation-qtquick/
+Hit a build here https://build.neon.kde.org/view/testy/job/test_konversation-qtquick/lastBuild/artifact/
 
 Gets published to store (unless there's a problem with auto-validation)
 
